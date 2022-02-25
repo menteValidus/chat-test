@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "SendBirdSDK",
+        "repositoryURL": "https://github.com/sendbird/SendBird-iOS-framework",
+        "state": {
+          "branch": null,
+          "revision": "0d5b614da6f7d432929f14d63ff28f18f29ce2e8",
+          "version": "3.1.5"
+        }
+      },
+      {
         "package": "SnapKit",
         "repositoryURL": "https://github.com/SnapKit/SnapKit",
         "state": {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B69C83827C8E89100682EC4 /* SendBirdSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 0B69C83727C8E89100682EC4 /* SendBirdSDK */; };
 		0BF7AD4227C8C6BD0085F71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */; };
 		0BF7AD4427C8C6BD0085F71B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */; };
 		0BF7AD4627C8C6BD0085F71B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4527C8C6BD0085F71B /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B69C83827C8E89100682EC4 /* SendBirdSDK in Frameworks */,
 				0BF7AD5B27C8CC460085F71B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +102,7 @@
 			name = "chat-test-assignment";
 			packageProductDependencies = (
 				0BF7AD5A27C8CC460085F71B /* SnapKit */,
+				0B69C83727C8E89100682EC4 /* SendBirdSDK */,
 			);
 			productName = "chat-test-assignment";
 			productReference = 0BF7AD3E27C8C6BD0085F71B /* chat-test-assignment.app */;
@@ -131,6 +134,7 @@
 			mainGroup = 0BF7AD3527C8C6BD0085F71B;
 			packageReferences = (
 				0BF7AD5927C8CC460085F71B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				0B69C83627C8E89100682EC4 /* XCRemoteSwiftPackageReference "SendBird-iOS-framework" */,
 			);
 			productRefGroup = 0BF7AD3F27C8C6BD0085F71B /* Products */;
 			projectDirPath = "";
@@ -376,6 +380,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0B69C83627C8E89100682EC4 /* XCRemoteSwiftPackageReference "SendBird-iOS-framework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sendbird/SendBird-iOS-framework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.5;
+			};
+		};
 		0BF7AD5927C8CC460085F71B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -387,6 +399,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0B69C83727C8E89100682EC4 /* SendBirdSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0B69C83627C8E89100682EC4 /* XCRemoteSwiftPackageReference "SendBird-iOS-framework" */;
+			productName = SendBirdSDK;
+		};
 		0BF7AD5A27C8CC460085F71B /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0BF7AD5927C8CC460085F71B /* XCRemoteSwiftPackageReference "SnapKit" */;
