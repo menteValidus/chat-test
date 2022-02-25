@@ -16,6 +16,13 @@ class ViewController: UIViewController {
         
         return label
     }()
+    
+    private lazy var textfield: UITextField = {
+        let textfield = UITextField()
+        textfield.placeholder = "Send a message..."
+        
+        return textfield
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +35,14 @@ class ViewController: UIViewController {
         
         messageLabel.snp.makeConstraints { [self] make in
             make.center.equalTo(self.view.center)
+        }
+        
+        self.view.addSubview(textfield)
+        
+        textfield.snp.makeConstraints { [self] make in
+            make.top.equalTo(messageLabel.snp.bottom).offset(12)
+            make.leading.equalTo(self.view.snp.leading).offset(30)
+            make.trailing.equalTo(self.view.snp.trailing).offset(-30)
         }
     }
 }
