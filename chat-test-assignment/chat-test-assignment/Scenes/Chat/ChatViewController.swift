@@ -27,6 +27,14 @@ class ChatViewController: UIViewController {
         return textfield
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        
+        return tableView
+    }()
+    
+    // MARK: - Lifecycle
+    
     deinit {
         cancelBag.removeAll()
     }
@@ -44,6 +52,8 @@ class ChatViewController: UIViewController {
         bindViewModel()
         viewModel.startChat()
     }
+    
+    // MARK: - Configuration
     
     private func bindViewModel() {
     }
@@ -67,8 +77,21 @@ class ChatViewController: UIViewController {
             make.leading.equalTo(self.view.snp.leading).offset(30)
             make.trailing.equalTo(self.view.snp.trailing).offset(-30)
         }
+        
+        self.view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { [self] make in
+            make.top.equalTo(self.view.snp.top)
+            make.leading.equalTo(self.view.snp.leading)
+            make.trailing.equalTo(self.view.snp.trailing)
+            make.bottom.equalTo(self.textfield.snp.top).offset(-24)
+        }
+        
+        tableView.backgroundColor = .red
     }
 }
+
+
 
 extension ChatViewController: UITextFieldDelegate {
     
