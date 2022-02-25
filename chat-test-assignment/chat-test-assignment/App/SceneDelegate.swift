@@ -16,8 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let viewController = ViewController()
-        viewController.view.backgroundColor = .white
+        let viewController = ChatViewController()
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         

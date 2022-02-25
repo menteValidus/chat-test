@@ -9,6 +9,7 @@ import Foundation
 
 enum StorageKey: String {
     case userId
+    case lastChannelId
 }
 
 protocol KeyValueStorage {
