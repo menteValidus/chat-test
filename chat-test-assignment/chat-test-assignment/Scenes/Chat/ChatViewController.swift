@@ -13,14 +13,11 @@ class ChatViewController: UIViewController {
     
     var viewModel: ChatViewModel = .init()
     
+    private let keyboardListener = KeyboardListener()
+    
     private var cancelBag: Set<AnyCancellable> = []
     
-    private lazy var messageLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Waiting for the message..."
-        
-        return label
-    }()
+    private var enterMessageBottomConstraint: Constraint?
     
     private lazy var textfield: UITextField = {
         let textfield = UITextField()
@@ -38,6 +35,7 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         
         configureViews()
+        subscribeToKeyboardChanges()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,10 +46,13 @@ class ChatViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.$lastReceivedMessage
+    }
+    
+    private func subscribeToKeyboardChanges() {
+        keyboardListener.$keyboardHeight
             .receive(on: RunLoop.main)
-            .sink { [weak self] message in
-                self?.messageLabel.text = message ?? "Waiting for the message..."
+            .sink { [weak self] height in
+                self?.enterMessageBottomConstraint?.update(offset: -height)
             }
             .store(in: &cancelBag)
     }
@@ -59,16 +60,10 @@ class ChatViewController: UIViewController {
     private func configureViews() {
         self.view.backgroundColor = .white
         
-        self.view.addSubview(messageLabel)
-        
-        messageLabel.snp.makeConstraints { [self] make in
-            make.center.equalTo(self.view.center)
-        }
-        
         self.view.addSubview(textfield)
         
         textfield.snp.makeConstraints { [self] make in
-            make.top.equalTo(messageLabel.snp.bottom).offset(12)
+            enterMessageBottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
             make.leading.equalTo(self.view.snp.leading).offset(30)
             make.trailing.equalTo(self.view.snp.trailing).offset(-30)
         }
