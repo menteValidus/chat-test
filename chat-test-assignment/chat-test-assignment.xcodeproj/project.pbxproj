@@ -56,9 +56,6 @@
 			children = (
 				0BF7AD5627C8C8080085F71B /* App */,
 				0BF7AD5527C8C72A0085F71B /* Scenes */,
-				0BF7AD4A27C8C6BF0085F71B /* Assets.xcassets */,
-				0BF7AD4C27C8C6BF0085F71B /* LaunchScreen.storyboard */,
-				0BF7AD4F27C8C6BF0085F71B /* Info.plist */,
 			);
 			path = "chat-test-assignment";
 			sourceTree = "<group>";
@@ -74,6 +71,9 @@
 		0BF7AD5627C8C8080085F71B /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0BF7AD4A27C8C6BF0085F71B /* Assets.xcassets */,
+				0BF7AD4F27C8C6BF0085F71B /* Info.plist */,
+				0BF7AD4C27C8C6BF0085F71B /* LaunchScreen.storyboard */,
 				0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */,
 				0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */,
 			);
