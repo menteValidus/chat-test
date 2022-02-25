@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0B69C83827C8E89100682EC4 /* SendBirdSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 0B69C83727C8E89100682EC4 /* SendBirdSDK */; };
+		0B69C83B27C8EC7E00682EC4 /* ChatServicesStarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B69C83A27C8EC7E00682EC4 /* ChatServicesStarter.swift */; };
+		0B69C83D27C8ED9000682EC4 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B69C83C27C8ED9000682EC4 /* UserDefaultsStorage.swift */; };
 		0BF7AD4227C8C6BD0085F71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */; };
 		0BF7AD4427C8C6BD0085F71B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */; };
 		0BF7AD4627C8C6BD0085F71B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4527C8C6BD0085F71B /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B69C83A27C8EC7E00682EC4 /* ChatServicesStarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServicesStarter.swift; sourceTree = "<group>"; };
+		0B69C83C27C8ED9000682EC4 /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		0BF7AD3E27C8C6BD0085F71B /* chat-test-assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chat-test-assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +43,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B69C83927C8EC5E00682EC4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0B69C83A27C8EC7E00682EC4 /* ChatServicesStarter.swift */,
+				0B69C83C27C8ED9000682EC4 /* UserDefaultsStorage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0BF7AD3527C8C6BD0085F71B = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +71,7 @@
 		0BF7AD4027C8C6BD0085F71B /* chat-test-assignment */ = {
 			isa = PBXGroup;
 			children = (
+				0B69C83927C8EC5E00682EC4 /* Models */,
 				0BF7AD5627C8C8080085F71B /* App */,
 				0BF7AD5527C8C72A0085F71B /* Scenes */,
 			);
@@ -162,7 +176,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B69C83D27C8ED9000682EC4 /* UserDefaultsStorage.swift in Sources */,
 				0BF7AD4627C8C6BD0085F71B /* ViewController.swift in Sources */,
+				0B69C83B27C8EC7E00682EC4 /* ChatServicesStarter.swift in Sources */,
 				0BF7AD4227C8C6BD0085F71B /* AppDelegate.swift in Sources */,
 				0BF7AD4427C8C6BD0085F71B /* SceneDelegate.swift in Sources */,
 			);
