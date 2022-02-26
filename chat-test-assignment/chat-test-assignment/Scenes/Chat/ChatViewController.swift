@@ -59,6 +59,12 @@ class ChatViewController: UIViewController {
     // MARK: - Configuration
     
     private func bindViewModel() {
+        viewModel.$messages
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &cancelBag)
     }
     
     private func subscribeToKeyboardChanges() {
@@ -100,6 +106,7 @@ class ChatViewController: UIViewController {
 }
 
 extension ChatViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         120
     }

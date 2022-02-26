@@ -10,9 +10,6 @@ import Combine
 final class ChatViewModel {
     
     @Published
-    private(set) var lastReceivedMessage: String?
-    
-    @Published
     private(set) var messages: [Message] = [.init(text: "Testing...\nTesting..."),
                                             .init(text: "Another test...\n\n\n\n\n\nEnd of line..."),
                                             .init(text: "Another test...\n\n\n\n\n\nEnd of line...")]
@@ -29,8 +26,9 @@ final class ChatViewModel {
         self.chatMessagesListener = SendBirdChatMessagesListener()
         
         chatMessagesListener.lastReceivedMessagePublisher
+            .dropFirst()
             .sink { [weak self] message in
-                self?.lastReceivedMessage = message
+                self?.append(newMessageText: message ?? "Corrupted message")
             }
             .store(in: &cancelBag)
     }
@@ -48,5 +46,9 @@ final class ChatViewModel {
     
     func send(message: String) {
         chatSession?.send(message: message)
+    }
+    
+    private func append(newMessageText text: String) {
+        messages.append(Message(text: text))
     }
 }
