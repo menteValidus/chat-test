@@ -29,14 +29,14 @@ final class ChatServicesStarter: ServicesStarter {
     
     private func handleUserChatConnection() {
         if let userId: String = storage.get(forKey: .userId) {
-            connectToChat(withId: userId)
+            connectToChatService(withId: userId)
         } else {
             let userId = createAndSaveNewUserId()
-            connectToChat(withId: userId)
+            connectToChatService(withId: userId)
         }
     }
     
-    private func connectToChat(withId userId: String) {
+    private func connectToChatService(withId userId: String) {
         SBDMain.connect(withUserId: userId) { user, error in
             guard let user = user,
                   error == nil else {

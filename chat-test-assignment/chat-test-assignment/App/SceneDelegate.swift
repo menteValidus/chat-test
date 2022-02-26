@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let viewController = ChatViewController()
+        let viewController = InviteMeViewController()
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
         
