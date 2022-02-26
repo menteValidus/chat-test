@@ -9,10 +9,16 @@ import UIKit
 
 final class MessageBubbleView: UIView {
     
+    var messageText: String? {
+        didSet {
+            messageTextView.text = messageText
+        }
+    }
+    
     private lazy var messageTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
-        textView.text = "Testing out, testing out..."
+        textView.text = messageText ?? "Testing out, testing out..."
         
         return textView
     }()

@@ -115,6 +115,7 @@ extension ChatViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.reuseIdentifier) as? MessageTableViewCell else {
             return .init()
         }
+        cell.messageText = viewModel.messages[indexPath.row].text
         
         return cell
     }

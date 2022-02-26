@@ -10,6 +10,12 @@ import SnapKit
 
 final class MessageTableViewCell: UITableViewCell, ReuseIdentifiable {
     
+    var messageText: String? {
+        didSet {
+            messageView.messageText = messageText
+        }
+    }
+    
     private lazy var messageView: MessageBubbleView = {
         .init()
     }()
