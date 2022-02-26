@@ -8,12 +8,20 @@
 import UIKit
 import SnapKit
 import Combine
+import SendBirdSDK
 
 class InviteMeViewController: UIViewController {
     
     var viewModel: InviteMeViewModel = .init()
     
     private lazy var qrView: UIImageView = .init()
+    private lazy var scanButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Scan invitation", for: .normal)
+        button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+        
+        return button
+    }()
     
     private var cancelBag: Set<AnyCancellable> = []
 
@@ -25,6 +33,8 @@ class InviteMeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SBDMain.add(self, identifier: self.description)
         
         configureViews()
         bindViewModel()
@@ -44,6 +54,13 @@ class InviteMeViewController: UIViewController {
         qrView.snp.makeConstraints { make in
             make.center.equalTo(self.view.snp.center)
         }
+        
+        view.addSubview(scanButton)
+        
+        scanButton.snp.makeConstraints { make in
+            make.top.equalTo(qrView.snp.bottom).offset(30)
+            make.centerX.equalTo(qrView.snp.centerX)
+        }
     }
     
     private func bindViewModel() {
@@ -53,5 +70,21 @@ class InviteMeViewController: UIViewController {
                 self?.qrView.image = image
             }
             .store(in: &cancelBag)
+    }
+    
+    // MARK: - Actions
+    
+    @objc
+    private func sendButtonTapped() {
+        self.navigationController?.pushViewController(InvitationCodeScanViewController(), animated: true)
+    }
+}
+
+extension InviteMeViewController: SBDChannelDelegate {
+    
+    func channel(_ sender: SBDGroupChannel, didReceiveInvitation invitees: [SBDUser]?, inviter: SBDUser?) {
+        sender.acceptInvitation { error in
+            print("Accepting invitation", error)
+        }
     }
 }

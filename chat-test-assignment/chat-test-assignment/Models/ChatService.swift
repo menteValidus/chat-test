@@ -25,30 +25,31 @@ final class SendBirdChatService: ChatService {
         let params = SBDOpenChannelParams()
         params.name = "Test_channel"
         
-        if let channelUrl: String = storage.get(forKey: .lastChannelId) {
-            SBDOpenChannel.getWithUrl(channelUrl) { openChannel, error in
-                guard let channel = openChannel,
-                      error == nil else {
-                          assertionFailure("Failed to enter channel with url: \(channelUrl)")
-                          return
-                      }
-                
-                print("Successfully entered channel with url: \(channel.channelUrl)")
-                
-                channel.enter { error in
-                    guard error == nil else {
-                        assertionFailure("Failed to enter channel with url: \(channel.channelUrl)")
-                        return
-                    }
-                    
-                    completionHandler(SendBirdChatSession(openChannel: channel))
-                }
-            }
-            
-            return
-        }
+//        if let channelUrl: String = storage.get(forKey: .lastChannelId) {
+//            SBDOpenChannel.getWithUrl(channelUrl) { openChannel, error in
+//                guard let channel = openChannel,
+//                      error == nil else {
+//                          assertionFailure("Failed to enter channel with url: \(channelUrl)")
+//                          return
+//                      }
+//
+//                print("Successfully entered channel with url: \(channel.channelUrl)")
+//
+//                channel.enter { error in
+//                    guard error == nil else {
+//                        assertionFailure("Failed to enter channel with url: \(channel.channelUrl)")
+//                        return
+//                    }
+//
+//                    completionHandler(SendBirdChatSession(openChannel: channel))
+//                }
+//            }
+//
+//            return
+//        }
         
-        SBDOpenChannel.createChannel(with: params) { openChannel, error in
+        SBDGroupChannel.createChannel(withUserIds: ["6AC5DF5A-EEB0-47AF-860F-046A7855DCBE"],
+                                      isDistinct: false) { openChannel, error in
             guard let channel = openChannel,
                   error == nil else {
                       assertionFailure("Failed to open channel with params: \(params)")

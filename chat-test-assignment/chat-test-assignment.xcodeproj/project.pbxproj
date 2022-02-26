@@ -21,6 +21,7 @@
 		0BB0D7BC27CA7B1600C70614 /* InviteMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7BB27CA7B1600C70614 /* InviteMeViewController.swift */; };
 		0BB0D7BE27CA7D1D00C70614 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7BD27CA7D1D00C70614 /* QRCodeGenerator.swift */; };
 		0BB0D7C027CA7D9200C70614 /* InviteMeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7BF27CA7D9100C70614 /* InviteMeViewModel.swift */; };
+		0BB0D7C327CA8B1500C70614 /* InvitationCodeScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7C227CA8B1500C70614 /* InvitationCodeScanViewController.swift */; };
 		0BF7AD4227C8C6BD0085F71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */; };
 		0BF7AD4427C8C6BD0085F71B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */; };
 		0BF7AD4627C8C6BD0085F71B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4527C8C6BD0085F71B /* ChatViewController.swift */; };
@@ -43,6 +44,7 @@
 		0BB0D7BB27CA7B1600C70614 /* InviteMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMeViewController.swift; sourceTree = "<group>"; };
 		0BB0D7BD27CA7D1D00C70614 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		0BB0D7BF27CA7D9100C70614 /* InviteMeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMeViewModel.swift; sourceTree = "<group>"; };
+		0BB0D7C227CA8B1500C70614 /* InvitationCodeScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeScanViewController.swift; sourceTree = "<group>"; };
 		0BF7AD3E27C8C6BD0085F71B /* chat-test-assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chat-test-assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 			path = InviteMe;
 			sourceTree = "<group>";
 		};
+		0BB0D7C127CA8AFC00C70614 /* InvitationCodeScan */ = {
+			isa = PBXGroup;
+			children = (
+				0BB0D7C227CA8B1500C70614 /* InvitationCodeScanViewController.swift */,
+			);
+			path = InvitationCodeScan;
+			sourceTree = "<group>";
+		};
 		0BF7AD3527C8C6BD0085F71B = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +163,7 @@
 		0BF7AD5527C8C72A0085F71B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0BB0D7C127CA8AFC00C70614 /* InvitationCodeScan */,
 				0BB0D7BA27CA7AE500C70614 /* InviteMe */,
 				0B69C83E27C8FCA700682EC4 /* Chat */,
 			);
@@ -250,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B69C83D27C8ED9000682EC4 /* UserDefaultsStorage.swift in Sources */,
+				0BB0D7C327CA8B1500C70614 /* InvitationCodeScanViewController.swift in Sources */,
 				0BB0D7B427CA363100C70614 /* ReuseIdentifiable.swift in Sources */,
 				0BB0D7B627CA3C8400C70614 /* MessageBubbleView.swift in Sources */,
 				0BF7AD4627C8C6BD0085F71B /* ChatViewController.swift in Sources */,
