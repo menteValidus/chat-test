@@ -174,10 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				0BF7AD4A27C8C6BF0085F71B /* Assets.xcassets */,
-				0BF7AD4F27C8C6BF0085F71B /* Info.plist */,
 				0BF7AD4C27C8C6BF0085F71B /* LaunchScreen.storyboard */,
 				0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */,
 				0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */,
+				0BF7AD4F27C8C6BF0085F71B /* Info.plist */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -420,6 +420,7 @@
 				DEVELOPMENT_TEAM = MX9H24GGG2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "chat-test-assignment/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Application uses camera for scanning QR codes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -449,6 +450,7 @@
 				DEVELOPMENT_TEAM = MX9H24GGG2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "chat-test-assignment/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Application uses camera for scanning QR codes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
