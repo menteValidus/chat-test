@@ -45,6 +45,7 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         
         configureViews()
+        registerCells()
         subscribeToKeyboardChanges()
     }
     
@@ -91,6 +92,11 @@ class ChatViewController: UIViewController {
         
         tableView.backgroundColor = .red
     }
+    
+    private func registerCells() {
+        tableView.register(MessageTableViewCell.self,
+                           forCellReuseIdentifier: MessageTableViewCell.reuseIdentifier)
+    }
 }
 
 extension ChatViewController: UITableViewDelegate {
@@ -102,11 +108,13 @@ extension ChatViewController: UITableViewDelegate {
 extension ChatViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        viewModel.messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = MessageTableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.reuseIdentifier) as? MessageTableViewCell else {
+            return .init()
+        }
         
         return cell
     }
