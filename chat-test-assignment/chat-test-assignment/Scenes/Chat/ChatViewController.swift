@@ -29,6 +29,8 @@ class ChatViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.delegate = self
         
         return tableView
     }()
@@ -91,7 +93,24 @@ class ChatViewController: UIViewController {
     }
 }
 
+extension ChatViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        120
+    }
+}
 
+extension ChatViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = MessageTableViewCell()
+        
+        return cell
+    }
+}
 
 extension ChatViewController: UITextFieldDelegate {
     
