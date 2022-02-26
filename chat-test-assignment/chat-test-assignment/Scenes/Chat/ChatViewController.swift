@@ -136,6 +136,7 @@ extension ChatViewController: UITextFieldDelegate {
         }
         
         viewModel.send(message: messageText)
+        textField.text = nil
         return true
     }
 }
