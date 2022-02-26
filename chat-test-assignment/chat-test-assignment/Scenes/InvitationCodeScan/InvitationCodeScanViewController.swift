@@ -115,7 +115,3 @@ extension InvitationCodeScanViewController: AVCaptureMetadataOutputObjectsDelega
         print(code)
     }
 }
-
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
-    
-}
