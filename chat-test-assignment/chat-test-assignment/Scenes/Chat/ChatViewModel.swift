@@ -14,21 +14,29 @@ final class ChatViewModel {
     
     private let chatService: ChatService
     private let chatMessagesListener: ChatMessagesListener
+    private let invitationId: String
     
     private var chatSession: ChatSession?
     
     private var cancelBag: Set<AnyCancellable> = []
     
-    init(chatService: ChatService = SendBirdChatService()) {
+    init(chatService: ChatService = SendBirdChatService(),
+         invitationId: String = "") {
         self.chatService = chatService
         self.chatMessagesListener = SendBirdChatMessagesListener()
+        self.invitationId = invitationId
         
-        chatMessagesListener.lastReceivedMessagePublisher
-            .dropFirst()
-            .sink { [weak self] message in
-                self?.append(newMessageText: message ?? "Corrupted message")
-            }
-            .store(in: &cancelBag)
+        listenForMessagesUpdate()
+    }
+    
+    init(chatService: ChatService = SendBirdChatService(),
+         chatSession: ChatSession) {
+        self.chatService = chatService
+        self.chatSession = chatSession
+        self.chatMessagesListener = SendBirdChatMessagesListener()
+        self.invitationId = ""
+        
+        listenForMessagesUpdate()
     }
     
     func startChat() {
@@ -37,7 +45,7 @@ final class ChatViewModel {
             return
         }
         
-        chatService.enterChannel { [weak self] chatSession in
+        chatService.enterChannel(invitationId: invitationId) { [weak self] chatSession in
             self?.chatSession = chatSession
         }
     }
@@ -49,5 +57,14 @@ final class ChatViewModel {
     
     private func append(newMessageText text: String) {
         messages.append(Message(text: text))
+    }
+    
+    private func listenForMessagesUpdate() {
+        chatMessagesListener.lastReceivedMessagePublisher
+            .dropFirst()
+            .sink { [weak self] message in
+                self?.append(newMessageText: message ?? "Corrupted message")
+            }
+            .store(in: &cancelBag)
     }
 }

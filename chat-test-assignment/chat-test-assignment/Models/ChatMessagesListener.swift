@@ -21,7 +21,7 @@ final class SendBirdChatMessagesListener: NSObject, ChatMessagesListener {
     override init() {
         super.init()
         
-        SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
+        SBDMain.add(self as SBDChannelDelegate, identifier: UUID().uuidString)
     }
     
     deinit {

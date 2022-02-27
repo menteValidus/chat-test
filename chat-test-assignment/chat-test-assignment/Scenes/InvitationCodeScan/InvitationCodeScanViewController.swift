@@ -8,7 +8,13 @@
 import AVFoundation
 import UIKit
 
+protocol InvitationCodeScanViewControllerDelegate: AnyObject {
+    func invitationCodeCaptured(invitationId: String)
+}
+
 class InvitationCodeScanViewController: UIViewController {
+    
+    weak var delegate: InvitationCodeScanViewControllerDelegate?
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -105,13 +111,14 @@ extension InvitationCodeScanViewController: AVCaptureMetadataOutputObjectsDelega
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
+            capture(code: stringValue)
         }
 
         dismiss(animated: true)
     }
     
-    func found(code: String) {
-        print(code)
+    private func capture(code: String) {
+        delegate?.invitationCodeCaptured(invitationId: code)
+        dismiss(animated: true)
     }
 }
