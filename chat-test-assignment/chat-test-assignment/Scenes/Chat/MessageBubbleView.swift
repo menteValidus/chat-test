@@ -9,20 +9,6 @@ import UIKit
 
 final class MessageBubbleView: UIView {
     
-    var messageText: String? {
-        didSet {
-            messageTextView.text = messageText
-        }
-    }
-    
-    private lazy var messageTextView: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .clear
-        textView.text = messageText ?? "Testing out, testing out..."
-        
-        return textView
-    }()
-    
     init() {
         super.init(frame: .zero)
         commonInit()
@@ -41,11 +27,5 @@ final class MessageBubbleView: UIView {
     private func commonInit() {
         backgroundColor = .green
         layer.cornerRadius = 10
-        
-        addSubview(messageTextView)
-        
-        messageTextView.snp.makeConstraints { make in
-            make.edges.equalTo(self.snp.edges)
-        }
     }
 }
