@@ -29,6 +29,14 @@ class ChatViewController: UIViewController {
         return textfield
     }()
     
+    private lazy var recordButton: UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(systemName: "record.circle")
+        button.setImage(image, for: .normal)
+        
+        return button
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
@@ -84,15 +92,22 @@ class ChatViewController: UIViewController {
         
         self.view.addSubview(textfield)
         
-        textfield.snp.makeConstraints { [self] make in
+        textfield.snp.makeConstraints { make in
             enterMessageBottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-bottomOffset).constraint
             make.leading.equalTo(self.view.snp.leading).offset(30)
+        }
+        
+        self.view.addSubview(recordButton)
+        
+        recordButton.snp.makeConstraints { make in
+            make.centerY.equalTo(self.textfield.snp.centerY)
+            make.trailing.equalTo(self.textfield.snp.trailing).offset(8)
             make.trailing.equalTo(self.view.snp.trailing).offset(-30)
         }
         
         self.view.addSubview(tableView)
         
-        tableView.snp.makeConstraints { [self] make in
+        tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.snp.top)
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
