@@ -68,6 +68,13 @@ final class ChatViewModel {
         append(newMessageText: message)
     }
     
+    private func sendAudioMessage(audioUrl: URL) {
+        guard let audioData = try? Data(contentsOf: audioUrl) else { return }
+        
+        chatSession?.sendAudioMessage(data: audioData)
+        appendnewAudioMessage(audioMessageUrl: audioUrl)
+    }
+    
     func recordingActionCalled() {
         if isRecording {
             stopRecording()
@@ -111,7 +118,7 @@ final class ChatViewModel {
             .dropFirst()
             .compactMap { $0 }
             .sink { [weak self] audioUrl in
-                self?.appendnewAudioMessage(audioMessageUrl: audioUrl)
+                self?.sendAudioMessage(audioUrl: audioUrl)
             }
             .store(in: &cancelBag)
     }
