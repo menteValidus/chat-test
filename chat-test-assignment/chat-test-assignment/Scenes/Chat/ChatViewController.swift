@@ -31,8 +31,6 @@ class ChatViewController: UIViewController {
     
     private lazy var recordButton: UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(systemName: "record.circle")
-        button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         
         return button
@@ -40,6 +38,7 @@ class ChatViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -80,7 +79,10 @@ class ChatViewController: UIViewController {
         viewModel.$isRecording
             .receive(on: RunLoop.main)
             .sink { [weak self] isRecording in
-                let image = isRecording ? UIImage(systemName: "stop.circle") : UIImage(systemName: "record.circle")
+                let configuration = UIImage.SymbolConfiguration(pointSize: 20)
+                let image = isRecording
+                            ? UIImage(systemName: "stop.circle", withConfiguration: configuration)
+                            : UIImage(systemName: "record.circle", withConfiguration: configuration)
                 self?.recordButton.setImage(image, for: .normal)
             }
             .store(in: &cancelBag)
@@ -122,8 +124,6 @@ class ChatViewController: UIViewController {
             make.trailing.equalTo(self.view.snp.trailing)
             make.bottom.equalTo(self.textfield.snp.top).offset(-24)
         }
-        
-        tableView.backgroundColor = .red
     }
     
     private func registerCells() {
