@@ -33,6 +33,7 @@ class ChatViewController: UIViewController {
         let button = UIButton(type: .system)
         let image = UIImage(systemName: "record.circle")
         button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -73,6 +74,14 @@ class ChatViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
+            }
+            .store(in: &cancelBag)
+        
+        viewModel.$isRecording
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isRecording in
+                let image = isRecording ? UIImage(systemName: "stop.circle") : UIImage(systemName: "record.circle")
+                self?.recordButton.setImage(image, for: .normal)
             }
             .store(in: &cancelBag)
     }
@@ -120,6 +129,13 @@ class ChatViewController: UIViewController {
     private func registerCells() {
         tableView.register(MessageTableViewCell.self,
                            forCellReuseIdentifier: MessageTableViewCell.reuseIdentifier)
+    }
+    
+    // MARK: - Actions
+    
+    @objc
+    private func recordButtonTapped() {
+        viewModel.recordingActionCalled()
     }
 }
 

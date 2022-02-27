@@ -1,19 +1,31 @@
 //
-//  AudioRecorder.swift
+//  AudioSessionRecorderService.swift
 //  chat-test-assignment
 //
 //  Created by Denis Cherniy on 27.02.2022.
 //
 
 import AVFoundation
+import Combine
 
 protocol AudioRecorderService: AnyObject {
+    
+    var lastRecordedAudioURLPublisher: Published<URL?>.Publisher { get }
+    
     func record() throws
+    func stopRecording()
 }
 
 final class AudioSessionRecorderService: NSObject, AudioRecorderService {
     
     private typealias AudioRecordingSettings = [String: Any]
+    
+    var lastRecordedAudioURLPublisher: Published<URL?>.Publisher {
+        $lastRecordedAudioURL
+    }
+    
+    @Published
+    private var lastRecordedAudioURL: URL?
     
     private let audioSession: AVAudioSession
     
@@ -40,10 +52,14 @@ final class AudioSessionRecorderService: NSObject, AudioRecorderService {
                 if allowed {
                     self?.startAudioRecording()
                 } else {
-                    // failed to record!
+                    print("Audio recording usage permission wasn't granted")
                 }
             }
         }
+    }
+    
+    func stopRecording() {
+        finishRecording(success: true)
     }
     
     private func startAudioRecording() {
@@ -75,6 +91,7 @@ final class AudioSessionRecorderService: NSObject, AudioRecorderService {
 extension AudioSessionRecorderService: AVAudioRecorderDelegate {
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        lastRecordedAudioURL = recorder.url
         finishRecording(success: flag)
     }
 }
