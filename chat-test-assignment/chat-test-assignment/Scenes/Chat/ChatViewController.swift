@@ -11,6 +11,8 @@ import Combine
 
 class ChatViewController: UIViewController {
     
+    private let bottomOffset: CGFloat = 30
+    
     var viewModel: ChatViewModel = .init()
     
     private let keyboardListener = KeyboardListener()
@@ -71,7 +73,8 @@ class ChatViewController: UIViewController {
         keyboardListener.$keyboardHeight
             .receive(on: RunLoop.main)
             .sink { [weak self] height in
-                self?.enterMessageBottomConstraint?.update(offset: -height)
+                let offset = height > 0 ? height : self?.bottomOffset ?? 0
+                self?.enterMessageBottomConstraint?.update(offset: -offset)
             }
             .store(in: &cancelBag)
     }
@@ -82,7 +85,7 @@ class ChatViewController: UIViewController {
         self.view.addSubview(textfield)
         
         textfield.snp.makeConstraints { [self] make in
-            enterMessageBottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
+            enterMessageBottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-bottomOffset).constraint
             make.leading.equalTo(self.view.snp.leading).offset(30)
             make.trailing.equalTo(self.view.snp.trailing).offset(-30)
         }
