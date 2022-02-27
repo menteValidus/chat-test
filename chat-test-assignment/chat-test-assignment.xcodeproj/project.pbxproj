@@ -24,6 +24,7 @@
 		0BB0D7C327CA8B1500C70614 /* InvitationCodeScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7C227CA8B1500C70614 /* InvitationCodeScanViewController.swift */; };
 		0BB0D7C527CBAB7900C70614 /* AudioSessionRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7C427CBAB7900C70614 /* AudioSessionRecorderService.swift */; };
 		0BB0D7C727CC0A3200C70614 /* AudioPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7C627CC0A3200C70614 /* AudioPlayerService.swift */; };
+		0BB0D7C927CC15F100C70614 /* AudioMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7C827CC15F100C70614 /* AudioMessageTableViewCell.swift */; };
 		0BF7AD4227C8C6BD0085F71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */; };
 		0BF7AD4427C8C6BD0085F71B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */; };
 		0BF7AD4627C8C6BD0085F71B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4527C8C6BD0085F71B /* ChatViewController.swift */; };
@@ -49,6 +50,7 @@
 		0BB0D7C227CA8B1500C70614 /* InvitationCodeScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeScanViewController.swift; sourceTree = "<group>"; };
 		0BB0D7C427CBAB7900C70614 /* AudioSessionRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSessionRecorderService.swift; sourceTree = "<group>"; };
 		0BB0D7C627CC0A3200C70614 /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
+		0BB0D7C827CC15F100C70614 /* AudioMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageTableViewCell.swift; sourceTree = "<group>"; };
 		0BF7AD3E27C8C6BD0085F71B /* chat-test-assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chat-test-assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,9 +90,9 @@
 		0B69C83E27C8FCA700682EC4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				0BB0D7CA27CC15FB00C70614 /* Cells */,
 				0BF7AD4527C8C6BD0085F71B /* ChatViewController.swift */,
 				0B69C83F27C8FCBA00682EC4 /* ChatViewModel.swift */,
-				0BB0D7B027CA333A00C70614 /* MessageTableViewCell.swift */,
 				0BB0D7B527CA3C8400C70614 /* MessageBubbleView.swift */,
 			);
 			path = Chat;
@@ -136,6 +138,15 @@
 				0BB0D7C227CA8B1500C70614 /* InvitationCodeScanViewController.swift */,
 			);
 			path = InvitationCodeScan;
+			sourceTree = "<group>";
+		};
+		0BB0D7CA27CC15FB00C70614 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0BB0D7C827CC15F100C70614 /* AudioMessageTableViewCell.swift */,
+				0BB0D7B027CA333A00C70614 /* MessageTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		0BF7AD3527C8C6BD0085F71B = {
@@ -278,6 +289,7 @@
 				0BB0D7BC27CA7B1600C70614 /* InviteMeViewController.swift in Sources */,
 				0BB0D7AF27C9749F00C70614 /* KeyboardListener.swift in Sources */,
 				0B69C83B27C8EC7E00682EC4 /* ChatServicesStarter.swift in Sources */,
+				0BB0D7C927CC15F100C70614 /* AudioMessageTableViewCell.swift in Sources */,
 				0BB0D7C727CC0A3200C70614 /* AudioPlayerService.swift in Sources */,
 				0BB0D7BE27CA7D1D00C70614 /* QRCodeGenerator.swift in Sources */,
 				0BB0D7B927CA3DEB00C70614 /* Message.swift in Sources */,

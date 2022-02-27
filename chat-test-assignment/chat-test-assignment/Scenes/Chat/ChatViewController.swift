@@ -129,6 +129,8 @@ class ChatViewController: UIViewController {
     private func registerCells() {
         tableView.register(MessageTableViewCell.self,
                            forCellReuseIdentifier: MessageTableViewCell.reuseIdentifier)
+        tableView.register(AudioMessageTableViewCell.self,
+                           forCellReuseIdentifier: AudioMessageTableViewCell.reuseIdentifier)
     }
     
     // MARK: - Actions
@@ -153,10 +155,35 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = viewModel.messages[indexPath.row]
+        
+        if message.audioAssetUrl != nil {
+            return createAudioMessageCellView(forTableView: tableView, withMessageData: message)
+        } else {
+            return createTextMessageCellView(forTableView: tableView, withMessageData: message)
+        }
+    }
+    
+    private func createTextMessageCellView(forTableView tableView: UITableView,
+                                           withMessageData message: Message) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.reuseIdentifier) as? MessageTableViewCell else {
             return .init()
         }
-        cell.messageText = viewModel.messages[indexPath.row].text
+        cell.messageText = message.text
+        
+        return cell
+    }
+    
+    private func createAudioMessageCellView(forTableView tableView: UITableView,
+                                            withMessageData message: Message) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AudioMessageTableViewCell.reuseIdentifier) as? AudioMessageTableViewCell,
+              let audioUrl = message.audioAssetUrl else {
+            return .init()
+        }
+        cell.selectionStyle = .none
+        cell.onTapAction = { [weak self] in
+            self?.viewModel.playAudioMessage(forUrl: audioUrl)
+        }
         
         return cell
     }

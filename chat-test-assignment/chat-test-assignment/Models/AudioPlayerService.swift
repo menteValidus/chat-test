@@ -8,7 +8,8 @@
 import AVFoundation
 
 protocol IAudioPlayerService: AnyObject {
-    
+    func playSound(forURL url: URL) throws
+    func stopPlaying()
 }
 
 final class AudioPlayerService: IAudioPlayerService {
@@ -27,5 +28,9 @@ final class AudioPlayerService: IAudioPlayerService {
         player = try AVAudioPlayer(contentsOf: url)
         
         player?.play()
+    }
+    
+    func stopPlaying() {
+        player?.stop()
     }
 }

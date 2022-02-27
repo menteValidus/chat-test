@@ -25,7 +25,7 @@ final class MessageBubbleView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .green
+        backgroundColor = .systemGreen
         layer.cornerRadius = 10
     }
 }

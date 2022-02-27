@@ -5,6 +5,7 @@
 //  Created by Denis Cherniy on 25.02.2022.
 //
 
+import Foundation
 import Combine
 
 final class ChatViewModel {
@@ -75,6 +76,10 @@ final class ChatViewModel {
         }
     }
     
+    func playAudioMessage(forUrl url: URL) {
+        try? audioPlayerService.playSound(forURL: url)
+    }
+    
     private func startRecording() {
         isRecording = true
         try? audioRecorderService.record()
@@ -89,21 +94,24 @@ final class ChatViewModel {
         messages.append(Message(text: text))
     }
     
+    private func appendnewAudioMessage(audioMessageUrl url: URL) {
+        messages.append(Message(audioAssetUrl: url))
+    }
+    
     private func listenForMessagesUpdate() {
         chatMessagesListener.lastReceivedMessagePublisher
             .dropFirst()
+            .compactMap { $0 }
             .sink { [weak self] message in
-                self?.append(newMessageText: message ?? "Corrupted message")
+                self?.append(newMessageText: message)
             }
             .store(in: &cancelBag)
         
         audioRecorderService.lastRecordedAudioURLPublisher
             .dropFirst()
+            .compactMap { $0 }
             .sink { [weak self] audioUrl in
-                self?.append(newMessageText: "Audio message")
-                
-                guard let audioUrl = audioUrl else { return }
-                try? self?.audioPlayerService.playSound(forURL: audioUrl)
+                self?.appendnewAudioMessage(audioMessageUrl: audioUrl)
             }
             .store(in: &cancelBag)
     }
