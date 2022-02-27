@@ -17,6 +17,7 @@ final class ChatViewModel {
     private let chatService: ChatService
     private let chatMessagesListener: ChatMessagesListener
     private let audioRecorderService: AudioRecorderService
+    private let audioPlayerService: AudioPlayerService
     private let invitationId: String
     
     private var chatSession: ChatSession?
@@ -25,10 +26,12 @@ final class ChatViewModel {
     
     init(chatService: ChatService = SendBirdChatService(),
          audioRecorderService: AudioRecorderService = AudioSessionRecorderService(),
+         audioPlayerService: AudioPlayerService = AudioPlayerService(),
          invitationId: String = "") {
         self.chatService = chatService
         self.chatMessagesListener = SendBirdChatMessagesListener()
         self.audioRecorderService = audioRecorderService
+        self.audioPlayerService = audioPlayerService
         self.invitationId = invitationId
         
         listenForMessagesUpdate()
@@ -36,11 +39,13 @@ final class ChatViewModel {
     
     init(chatService: ChatService = SendBirdChatService(),
          audioRecorderService: AudioRecorderService = AudioSessionRecorderService(),
+         audioPlayerService: AudioPlayerService = AudioPlayerService(),
          chatSession: ChatSession) {
         self.chatService = chatService
         self.chatSession = chatSession
         self.chatMessagesListener = SendBirdChatMessagesListener()
         self.audioRecorderService = audioRecorderService
+        self.audioPlayerService = audioPlayerService
         self.invitationId = ""
         
         listenForMessagesUpdate()
@@ -94,8 +99,11 @@ final class ChatViewModel {
         
         audioRecorderService.lastRecordedAudioURLPublisher
             .dropFirst()
-            .sink { [weak self] audioURL in
+            .sink { [weak self] audioUrl in
                 self?.append(newMessageText: "Audio message")
+                
+                guard let audioUrl = audioUrl else { return }
+                try? self?.audioPlayerService.playSound(forURL: audioUrl)
             }
             .store(in: &cancelBag)
     }
