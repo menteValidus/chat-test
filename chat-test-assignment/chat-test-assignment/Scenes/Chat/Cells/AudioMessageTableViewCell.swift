@@ -52,7 +52,6 @@ final class AudioMessageTableViewCell: UITableViewCell, ReuseIdentifiable {
         contentView.addSubview(messageView)
         
         messageView.snp.makeConstraints { make in
-            make.leading.equalTo(self.contentView.snp.leading).offset(24)
             make.trailing.equalTo(self.contentView.snp.trailing).offset(-24)
             make.top.equalTo(self.contentView.snp.top).offset(8)
             make.bottom.equalTo(self.contentView.snp.bottom).offset(-8)
@@ -61,10 +60,10 @@ final class AudioMessageTableViewCell: UITableViewCell, ReuseIdentifiable {
         contentView.addSubview(playButton)
         
         playButton.snp.makeConstraints { make in
-            // TODO: Specify here top down constraints after making cells elastic
+            make.top.equalTo(self.messageView.snp.top).offset(30)
+            make.bottom.equalTo(self.messageView.snp.bottom).offset(-30)
+            make.leading.equalTo(self.messageView.snp.leading).offset(30)
             make.trailing.equalTo(self.messageView.snp.trailing).offset(-30)
-            
-            make.centerY.equalTo(self.messageView.snp.centerY)
         }
     }
     
