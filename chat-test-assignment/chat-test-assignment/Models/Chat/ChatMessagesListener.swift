@@ -61,7 +61,7 @@ extension SendBirdChatMessagesListener: SBDChannelDelegate {
     }
     
     private func save(textMessage message: SBDBaseMessage) {
-        let date = Date(timeIntervalSince1970: TimeInterval(message.createdAt))
+        let date = Date(timeIntervalSince1970: TimeInterval(message.createdAt / 1000))
         lastReceivedMessage = Message(text: message.message,
                                       date: date)
     }
