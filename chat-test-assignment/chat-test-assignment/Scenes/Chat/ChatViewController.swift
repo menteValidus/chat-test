@@ -89,7 +89,7 @@ class ChatViewController: UIViewController {
         viewModel.$isRecording
             .receive(on: RunLoop.main)
             .sink { [weak self] isRecording in
-                let configuration = UIImage.SymbolConfiguration(pointSize: 20)
+                let configuration = UIImage.SymbolConfiguration(pointSize: 30)
                 let image = isRecording
                             ? UIImage(systemName: "stop.circle", withConfiguration: configuration)
                             : UIImage(systemName: "record.circle", withConfiguration: configuration)

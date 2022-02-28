@@ -27,6 +27,7 @@
 		0BB0D7C927CC15F100C70614 /* AudioMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7C827CC15F100C70614 /* AudioMessageTableViewCell.swift */; };
 		0BB0D7CC27CCB64000C70614 /* SaveFileFromUrlFlowHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7CB27CCB64000C70614 /* SaveFileFromUrlFlowHandler.swift */; };
 		0BB0D7CF27CD05CB00C70614 /* ChatSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7CE27CD05CB00C70614 /* ChatSession.swift */; };
+		0BB0D7D127CD3D2900C70614 /* StyledNaviagationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0D7D027CD3D2900C70614 /* StyledNaviagationController.swift */; };
 		0BF7AD4227C8C6BD0085F71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */; };
 		0BF7AD4427C8C6BD0085F71B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */; };
 		0BF7AD4627C8C6BD0085F71B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7AD4527C8C6BD0085F71B /* ChatViewController.swift */; };
@@ -55,6 +56,7 @@
 		0BB0D7C827CC15F100C70614 /* AudioMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMessageTableViewCell.swift; sourceTree = "<group>"; };
 		0BB0D7CB27CCB64000C70614 /* SaveFileFromUrlFlowHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileFromUrlFlowHandler.swift; sourceTree = "<group>"; };
 		0BB0D7CE27CD05CB00C70614 /* ChatSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSession.swift; sourceTree = "<group>"; };
+		0BB0D7D027CD3D2900C70614 /* StyledNaviagationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledNaviagationController.swift; sourceTree = "<group>"; };
 		0BF7AD3E27C8C6BD0085F71B /* chat-test-assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chat-test-assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF7AD4127C8C6BD0085F71B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BF7AD4327C8C6BD0085F71B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				0BB0D7B327CA363100C70614 /* ReuseIdentifiable.swift */,
+				0BB0D7D027CD3D2900C70614 /* StyledNaviagationController.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				0BB0D7B927CA3DEB00C70614 /* Message.swift in Sources */,
 				0BF7AD4227C8C6BD0085F71B /* AppDelegate.swift in Sources */,
 				0B69C84027C8FCBA00682EC4 /* ChatViewModel.swift in Sources */,
+				0BB0D7D127CD3D2900C70614 /* StyledNaviagationController.swift in Sources */,
 				0BF7AD4427C8C6BD0085F71B /* SceneDelegate.swift in Sources */,
 				0BB0D7C027CA7D9200C70614 /* InviteMeViewModel.swift in Sources */,
 			);
@@ -465,7 +469,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -496,7 +500,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
