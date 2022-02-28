@@ -21,6 +21,13 @@ class ChatViewController: UIViewController {
     
     private var enterMessageBottomConstraint: Constraint?
     
+    private lazy var bottomContentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        
+        return view
+    }()
+    
     private lazy var textfield: UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "Send a message..."
@@ -95,8 +102,10 @@ class ChatViewController: UIViewController {
         keyboardListener.$keyboardHeight
             .receive(on: RunLoop.main)
             .sink { [weak self] height in
-                let offset = height > 0 ? height : self?.bottomOffset ?? 0
-                self?.enterMessageBottomConstraint?.update(offset: -offset)
+                guard let self = self else { return }
+                
+                let offset = (height > 0 ? height : 0) + self.bottomOffset
+                self.enterMessageBottomConstraint?.update(offset: -offset)
             }
             .store(in: &cancelBag)
     }
@@ -104,28 +113,37 @@ class ChatViewController: UIViewController {
     private func configureViews() {
         self.view.backgroundColor = .white
         
-        self.view.addSubview(textfield)
-        
-        textfield.snp.makeConstraints { make in
-            enterMessageBottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-bottomOffset).constraint
-            make.leading.equalTo(self.view.snp.leading).offset(30)
-        }
-        
-        self.view.addSubview(recordButton)
-        
-        recordButton.snp.makeConstraints { make in
-            make.centerY.equalTo(self.textfield.snp.centerY)
-            make.trailing.equalTo(self.textfield.snp.trailing).offset(8)
-            make.trailing.equalTo(self.view.snp.trailing).offset(-30)
-        }
-        
         self.view.addSubview(tableView)
+        self.view.addSubview(bottomContentView)
+        bottomContentView.addSubview(textfield)
+        bottomContentView.addSubview(recordButton)
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
-            make.bottom.equalTo(self.textfield.snp.top).offset(-24)
+        }
+        
+        
+        bottomContentView.snp.makeConstraints { make in
+            make.top.equalTo(self.tableView.snp.bottom).offset(16)
+            enterMessageBottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-bottomOffset).constraint
+            make.leading.equalTo(self.view.snp.leading).offset(30)
+            make.trailing.equalTo(self.view.snp.trailing).offset(-30)
+        }
+        
+        textfield.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualTo(self.bottomContentView.snp.top)
+            make.bottom.greaterThanOrEqualTo(self.bottomContentView.snp.bottom)
+            make.leading.equalTo(self.bottomContentView.snp.leading)
+        }
+        
+        recordButton.snp.makeConstraints { make in
+            make.height.equalTo(self.recordButton.snp.width)
+            make.top.equalTo(self.bottomContentView.snp.top)
+            make.bottom.equalTo(self.bottomContentView.snp.bottom)
+            make.leading.equalTo(self.textfield.snp.trailing).offset(8)
+            make.trailing.equalTo(self.bottomContentView.snp.trailing)
         }
     }
     
