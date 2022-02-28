@@ -22,6 +22,8 @@ final class AudioPlayerService: IAudioPlayerService {
     }
     
     func playSound(forURL url: URL) throws {
+        stopPlaying()
+        
         try audioSession.setCategory(.playback, mode: .default)
         try audioSession.setActive(true)
         
