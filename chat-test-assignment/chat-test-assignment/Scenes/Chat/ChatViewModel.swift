@@ -87,6 +87,10 @@ final class ChatViewModel {
         try? audioPlayerService.playSound(forURL: url)
     }
     
+    private func streamAudioMessage(forUrl url: URL) {
+        
+    }
+    
     private func startRecording() {
         isRecording = true
         try? audioRecorderService.record()
@@ -95,6 +99,10 @@ final class ChatViewModel {
     private func stopRecording() {
         isRecording = false
         audioRecorderService.stopRecording()
+    }
+    
+    private func append(newMessage message: Message) {
+        messages.append(message)
     }
     
     private func append(newMessageText text: String) {
@@ -110,7 +118,7 @@ final class ChatViewModel {
             .dropFirst()
             .compactMap { $0 }
             .sink { [weak self] message in
-                self?.append(newMessageText: message)
+                self?.append(newMessage: message)
             }
             .store(in: &cancelBag)
         
