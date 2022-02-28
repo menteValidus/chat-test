@@ -68,11 +68,12 @@ final class ChatViewModel {
         appendUser(newMessageText: message)
     }
     
-    private func sendAudioMessage(audioUrl: URL) {
+    private func sendUserAudioMessage(audioUrl: URL) {
         guard let audioData = try? Data(contentsOf: audioUrl) else { return }
         
         chatSession?.sendAudioMessage(data: audioData)
-        appendnewAudioMessage(audioMessageUrl: audioUrl)
+        appendnewAudioMessage(audioMessageUrl: audioUrl,
+                              createdByUser: true)
     }
     
     func recordingActionCalled() {
@@ -85,10 +86,6 @@ final class ChatViewModel {
     
     func playAudioMessage(forUrl url: URL) {
         try? audioPlayerService.playSound(forURL: url)
-    }
-    
-    private func streamAudioMessage(forUrl url: URL) {
-        
     }
     
     private func startRecording() {
@@ -110,8 +107,10 @@ final class ChatViewModel {
                                 createdByUser: true))
     }
     
-    private func appendnewAudioMessage(audioMessageUrl url: URL) {
-        messages.append(Message(audioAssetUrl: url))
+    private func appendnewAudioMessage(audioMessageUrl url: URL,
+                                       createdByUser: Bool = false) {
+        messages.append(Message(audioAssetUrl: url,
+                                createdByUser: createdByUser))
     }
     
     private func listenForMessagesUpdate() {
@@ -127,7 +126,7 @@ final class ChatViewModel {
             .dropFirst()
             .compactMap { $0 }
             .sink { [weak self] audioUrl in
-                self?.sendAudioMessage(audioUrl: audioUrl)
+                self?.sendUserAudioMessage(audioUrl: audioUrl)
             }
             .store(in: &cancelBag)
     }

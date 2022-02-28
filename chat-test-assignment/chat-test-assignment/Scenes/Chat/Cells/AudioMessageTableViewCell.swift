@@ -14,11 +14,38 @@ final class AudioMessageTableViewCell: UITableViewCell, ReuseIdentifiable {
     
     var onTapAction: Action?
     
+    var createdAtDate: Date = Date() {
+        didSet {
+            createdAtDateLabel.text = dateFormatter.string(from: createdAtDate)
+        }
+    }
+    
+    var messageBubbleColor: UIColor? {
+        didSet {
+            messageView.backgroundColor = messageBubbleColor
+        }
+    }
+    
+    private var dateFormatter: DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        return dateFormatter
+    }
+    
     private lazy var messageView: MessageBubbleView = {
         let view = MessageBubbleView()
         view.backgroundColor = .systemBlue
         
         return view
+    }()
+    
+    private lazy var createdAtDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12)
+        
+        return label
     }()
     
     private lazy var playButton: UIButton = {
@@ -54,7 +81,6 @@ final class AudioMessageTableViewCell: UITableViewCell, ReuseIdentifiable {
         messageView.snp.makeConstraints { make in
             make.trailing.equalTo(self.contentView.snp.trailing).offset(-24)
             make.top.equalTo(self.contentView.snp.top).offset(8)
-            make.bottom.equalTo(self.contentView.snp.bottom).offset(-8)
         }
         
         contentView.addSubview(playButton)
@@ -64,6 +90,14 @@ final class AudioMessageTableViewCell: UITableViewCell, ReuseIdentifiable {
             make.bottom.equalTo(self.messageView.snp.bottom).offset(-30)
             make.leading.equalTo(self.messageView.snp.leading).offset(30)
             make.trailing.equalTo(self.messageView.snp.trailing).offset(-30)
+        }
+        
+        contentView.addSubview(createdAtDateLabel)
+        
+        createdAtDateLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-8)
+            make.trailing.equalTo(self.contentView.snp.trailing).offset(-24)
+            make.top.equalTo(self.messageView.snp.bottom).offset(4)
         }
     }
     

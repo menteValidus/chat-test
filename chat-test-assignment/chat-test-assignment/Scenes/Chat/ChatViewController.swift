@@ -187,6 +187,8 @@ extension ChatViewController: UITableViewDataSource {
             return .init()
         }
         cell.selectionStyle = .none
+        cell.createdAtDate = message.date
+        cell.messageBubbleColor = message.createdByUser ? .systemBlue : .systemGray
         cell.onTapAction = { [weak self] in
             self?.viewModel.playAudioMessage(forUrl: audioUrl)
         }
