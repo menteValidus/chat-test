@@ -41,6 +41,7 @@ class ChatViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .interactive
+        tableView.estimatedRowHeight = 44
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -146,7 +147,7 @@ class ChatViewController: UIViewController {
 extension ChatViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        120
+        UITableView.automaticDimension
     }
 }
 
@@ -173,6 +174,8 @@ extension ChatViewController: UITableViewDataSource {
         }
         cell.selectionStyle = .none
         cell.messageText = message.text
+        cell.createdAtDate = message.date
+        cell.messageBubbleColor = message.createdByUser ? .systemBlue : .systemGray
         
         return cell
     }

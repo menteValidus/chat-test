@@ -65,7 +65,7 @@ final class ChatViewModel {
     
     func send(message: String) {
         chatSession?.send(message: message)
-        append(newMessageText: message)
+        appendUser(newMessageText: message)
     }
     
     private func sendAudioMessage(audioUrl: URL) {
@@ -105,8 +105,9 @@ final class ChatViewModel {
         messages.append(message)
     }
     
-    private func append(newMessageText text: String) {
-        messages.append(Message(text: text))
+    private func appendUser(newMessageText text: String) {
+        messages.append(Message(text: text,
+                                createdByUser: true))
     }
     
     private func appendnewAudioMessage(audioMessageUrl url: URL) {

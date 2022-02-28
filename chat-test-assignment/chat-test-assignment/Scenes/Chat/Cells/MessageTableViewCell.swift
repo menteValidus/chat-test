@@ -16,6 +16,26 @@ final class MessageTableViewCell: UITableViewCell, ReuseIdentifiable {
         }
     }
     
+    var createdAtDate: Date = Date() {
+        didSet {
+            createdAtDateLabel.text = dateFormatter.string(from: createdAtDate)
+        }
+    }
+    
+    var messageBubbleColor: UIColor? {
+        didSet {
+            messageView.backgroundColor = messageBubbleColor
+        }
+    }
+    
+    private var dateFormatter: DateFormatter {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        return dateFormatter
+    }
+    
     private lazy var messageView: MessageBubbleView = {
         .init()
     }()
@@ -26,6 +46,13 @@ final class MessageTableViewCell: UITableViewCell, ReuseIdentifiable {
         textView.text = messageText ?? "Testing out, testing out..."
         
         return textView
+    }()
+    
+    private lazy var createdAtDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12)
+        
+        return label
     }()
     
     init() {
@@ -50,13 +77,24 @@ final class MessageTableViewCell: UITableViewCell, ReuseIdentifiable {
             make.leading.equalTo(self.snp.leading).offset(24)
             make.trailing.equalTo(self.snp.trailing).offset(-24)
             make.top.equalTo(self.snp.top).offset(8)
-            make.bottom.equalTo(self.snp.bottom).offset(-8)
         }
         
         addSubview(messageTextView)
         
         messageTextView.snp.makeConstraints { make in
-            make.edges.equalTo(self.messageView.snp.edges)
+            make.height.greaterThanOrEqualTo(44)
+            make.leading.equalTo(self.messageView.snp.leading).offset(8)
+            make.trailing.equalTo(self.messageView.snp.trailing).offset(-8)
+            make.top.equalTo(self.messageView.snp.top).offset(8)
+            make.bottom.equalTo(self.messageView.snp.bottom).offset(-8)
+        }
+        
+        addSubview(createdAtDateLabel)
+        
+        createdAtDateLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(self.snp.bottom).offset(-8)
+            make.trailing.equalTo(self.snp.trailing).offset(-24)
+            make.top.equalTo(self.messageView.snp.bottom).offset(4)
         }
     }
 }
