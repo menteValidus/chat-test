@@ -1,45 +1,12 @@
 //
-//  ChatService.swift
+//  ChatSession.swift
 //  chat-test-assignment
 //
-//  Created by Denis Cherniy on 25.02.2022.
+//  Created by Denis Cherniy on 28.02.2022.
 //
 
+import Foundation
 import SendBirdSDK
-import UIKit
-
-protocol ChatService: AnyObject {
-    func enterChannel(invitationId: String, _ completionHandler: @escaping (ChatSession) -> Void)
-}
-
-// TODO: Fix this mess
-final class SendBirdChatService: ChatService {
-    
-    private let storage: UnsecureStorage
-    
-    init() {
-        storage = UserDefaultsStorage()
-    }
-    
-    func enterChannel(invitationId: String,
-                      _ completionHandler: @escaping (ChatSession) -> Void) {
-        let params = SBDOpenChannelParams()
-        params.name = "Test_channel"
-        
-        SBDGroupChannel.createChannel(withUserIds: [invitationId],
-                                      isDistinct: false) { groupChannel, error in
-            guard let channel = groupChannel,
-                  error == nil else {
-                      assertionFailure("Failed to open channel with params: \(params)")
-                      return
-                  }
-            
-            print("Successfully created channel with url: \(channel.channelUrl)")
-            
-            completionHandler(SendBirdChatSession(channel: channel))
-        }
-    }
-}
 
 protocol ChatSession: AnyObject {
     func send(message: String)
