@@ -195,7 +195,8 @@ extension ChatViewController: UITableViewDataSource {
 extension ChatViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let messageText = textField.text else {
+        guard let messageText = textField.text,
+              !messageText.isEmpty else {
             return false
         }
         
