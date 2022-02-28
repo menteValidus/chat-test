@@ -33,4 +33,8 @@ final class InviteMeViewModel {
             self?.invitationQRImage = qrImage
         }
     }
+    
+    func isUserId(_ id: String) -> Bool {
+        id != storage.get(forKey: .userId)
+    }
 }

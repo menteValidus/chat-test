@@ -86,11 +86,12 @@ extension InviteMeViewController: SBDChannelDelegate {
     
     func channel(_ sender: SBDGroupChannel, didReceiveInvitation invitees: [SBDUser]?, inviter: SBDUser?) {
         sender.acceptInvitation { [weak self] error in
-            // TODO: Move this logic to separate service
-            guard inviter?.userId != UserDefaultsStorage().get(forKey: .userId) else {
-                print("Failed to receive invitation: \(String(describing: error?.localizedDescription))")
-                return
-            }
+            guard let inviterId = inviter?.userId,
+                  let isUserId = self?.viewModel.isUserId(inviterId),
+                  isUserId else {
+                          print("Failed to receive invitation: \(String(describing: error?.localizedDescription))")
+                          return
+                      }
             
             let viewModel = ChatViewModel(chatSession: SendBirdChatSession(channel: sender))
             let vc = ChatViewController()
