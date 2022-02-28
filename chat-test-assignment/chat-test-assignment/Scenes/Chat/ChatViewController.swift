@@ -39,6 +39,7 @@ class ChatViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         
