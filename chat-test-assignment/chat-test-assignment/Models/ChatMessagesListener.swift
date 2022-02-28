@@ -6,6 +6,7 @@
 //
 
 import SendBirdSDK
+import Combine
 
 protocol ChatMessagesListener: AnyObject {
     var lastReceivedMessagePublisher: Published<Message?>.Publisher { get }
@@ -18,55 +19,50 @@ final class SendBirdChatMessagesListener: NSObject, ChatMessagesListener {
     @Published
     private var lastReceivedMessage: Message?
     
+    private var flowHandler: SaveFileFromUrlFlowHandler?
+    
+    private var cancelBag: Set<AnyCancellable> = []
+    
     override init() {
         super.init()
         
         SBDMain.add(self as SBDChannelDelegate, identifier: UUID().uuidString)
-    }
-    
-    deinit {
-        print("Deinited")
     }
 }
 
 extension SendBirdChatMessagesListener: SBDChannelDelegate {
     
     func channel(_ sender: SBDBaseChannel, didReceive message: SBDBaseMessage) {
-        let date = Date(timeIntervalSince1970: TimeInterval(message.createdAt))
-        
-        if let fileMessage = message as? SBDFileMessage,
-           let url = URL(string: fileMessage.url) {
-            DownloadManager.downloadFile(fromUrl: url) { [weak self] data in
-                let path = FileManager.default.urls(for: .documentDirectory,
-                                                       in: .userDomainMask)[0].appendingPathComponent("\(UUID().uuidString).m4a")
-                
-                try? data.write(to: path)
-                
-                self?.lastReceivedMessage = Message(date: date,
-                                                    audioAssetUrl: path)
-            }
+        if let fileMessage = message as? SBDFileMessage {
+            save(audioMessage: fileMessage)
         } else {
-            lastReceivedMessage = Message(text: message.message,
-                                          date: date)
+            save(textMessage: message)
         }
     }
-}
-
-import Combine
-
-final class DownloadManager {
     
-    static func downloadFile(fromUrl url: URL, _ completionHandler: @escaping (Data) -> Void) {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                if let error = error {
-                    print("Failed to download data from \(url), error: \(error)")
+    private func save(audioMessage message: SBDFileMessage) {
+        guard let url = URL(string: message.url) else { return }
+        
+        flowHandler = SaveFileFromUrlFlowHandler()
+        flowHandler?.process(remoteFileUrl: url)
+            .sink { result in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                default:
                     return
                 }
-            
-                if let data = data {
-                    completionHandler(data)
-                }
+            } receiveValue: { [weak self] url in
+                let date = Date(timeIntervalSince1970: TimeInterval(message.createdAt))
+                self?.lastReceivedMessage = Message(date: date,
+                                                    audioAssetUrl: url)
             }
-            task.resume()
+            .store(in: &cancelBag)
+    }
+    
+    private func save(textMessage message: SBDBaseMessage) {
+        let date = Date(timeIntervalSince1970: TimeInterval(message.createdAt))
+        lastReceivedMessage = Message(text: message.message,
+                                      date: date)
     }
 }
