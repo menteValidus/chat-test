@@ -73,9 +73,6 @@ class InvitationCodeScanViewController: UIViewController {
 
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
-        } else {
-            showFailureAlert()
-            return
         }
 
         let metadataOutput = AVCaptureMetadataOutput()
@@ -85,20 +82,7 @@ class InvitationCodeScanViewController: UIViewController {
 
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            showFailureAlert()
-            return
         }
-    }
-
-    private func showFailureAlert() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK",
-                                   style: .default,
-                                   handler: { [weak self] _ in
-            self?.dismiss(animated: true)
-        }))
-        present(ac, animated: true)
     }
 }
 
@@ -108,17 +92,16 @@ extension InvitationCodeScanViewController: AVCaptureMetadataOutputObjectsDelega
         captureSession.stopRunning()
 
         if let metadataObject = metadataObjects.first {
-            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-            guard let stringValue = readableObject.stringValue else { return }
+            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject,
+                  let stringValue = readableObject.stringValue else { return }
+            
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             capture(code: stringValue)
         }
-
-        dismiss(animated: true)
     }
     
     private func capture(code: String) {
+        self.navigationController?.popViewController(animated: false)
         delegate?.invitationCodeCaptured(invitationId: code)
-        dismiss(animated: true)
     }
 }

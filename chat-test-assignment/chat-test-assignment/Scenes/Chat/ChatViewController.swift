@@ -122,7 +122,7 @@ class ChatViewController: UIViewController {
         self.view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.snp.top)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
             make.bottom.equalTo(self.textfield.snp.top).offset(-24)

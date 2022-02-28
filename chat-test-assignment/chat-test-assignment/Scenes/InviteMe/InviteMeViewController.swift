@@ -49,6 +49,7 @@ class InviteMeViewController: UIViewController {
     // MARK: - Configuration
     
     private func configureViews() {
+        view.backgroundColor = .white
         view.addSubview(qrView)
         
         qrView.snp.makeConstraints { make in
