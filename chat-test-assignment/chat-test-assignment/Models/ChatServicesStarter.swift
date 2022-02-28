@@ -50,7 +50,6 @@ final class ChatServicesStarter: ServicesStarter {
     
     private func createAndSaveNewUserId() -> String {
         let id = UUID().uuidString
-        // TODO: Handle this possible error later
         try? storage.set(id, forKey: .userId)
         
         return id

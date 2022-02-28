@@ -78,7 +78,7 @@
 		0B69C83927C8EC5E00682EC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0BB0D7AD27C9745100C70614 /* Utilities */,
+				0BB0D7AE27C9749F00C70614 /* KeyboardListener.swift */,
 				0B69C83A27C8EC7E00682EC4 /* ChatServicesStarter.swift */,
 				0B69C83C27C8ED9000682EC4 /* UserDefaultsStorage.swift */,
 				0B69C84127C901A800682EC4 /* ChatService.swift */,
@@ -99,14 +99,6 @@
 				0BB0D7B527CA3C8400C70614 /* MessageBubbleView.swift */,
 			);
 			path = Chat;
-			sourceTree = "<group>";
-		};
-		0BB0D7AD27C9745100C70614 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				0BB0D7AE27C9749F00C70614 /* KeyboardListener.swift */,
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		0BB0D7B227CA360800C70614 /* Utility */ = {
