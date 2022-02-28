@@ -40,6 +40,7 @@ class ChatViewController: UIViewController {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .interactive
         tableView.dataSource = self
         tableView.delegate = self
         
