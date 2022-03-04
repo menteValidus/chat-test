@@ -16,10 +16,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let viewController = ViewController()
-        viewController.view.backgroundColor = .white
-        window?.rootViewController = viewController
+        let navigationController = StyledNaviagationController(rootViewController: InviteMeViewController())
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.isTranslucent = true
+        navigationController.view.backgroundColor = .clear
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        ChatServicesStarter().start()
     }
 
 }
